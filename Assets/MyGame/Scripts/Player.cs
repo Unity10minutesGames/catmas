@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
     private const string AXISHORIZONTAL = "Horizontal";
+    private const string AXISVERTICAL = "Vertical";
     private const string STATESCRATCH = "scratch";
     private float xMin, xMax;
 
@@ -13,7 +14,20 @@ public class Player : MonoBehaviour {
     public float moveSpeed = 5.0f;
     public float padding = 0.5f;
 
-    
+    private bool characterEyesPlayer = true;
+
+    public bool CharacterEyesPlayer
+    {
+        get
+        {
+            return characterEyesPlayer;
+        }
+
+        set
+        {
+            characterEyesPlayer = value;
+        }
+    }
 
     private void SetupMoveBounderies()
     {
@@ -21,7 +35,7 @@ public class Player : MonoBehaviour {
         xMin = gameCamera.ViewportToWorldPoint(new Vector3(0f, 0f, 0f)).x + padding;
         xMax = gameCamera.ViewportToWorldPoint(new Vector3(1f, 0f, 0f)).x - padding;
 
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
         //anim.SetTrigger(catidle);
     }
 
@@ -45,11 +59,28 @@ public class Player : MonoBehaviour {
     {
         Move();
 
-        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
-        if (Input.GetKeyDown(KeyCode.DownArrow) && stateInfo.fullPathHash == catidle)
-        {
-            Debug.Log("Arrow down pressed");
-            anim.SetTrigger(catscratch);
-        }
+        //AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        //if (Input.GetKeyDown(KeyCode.DownArrow) ||  stateInfo.fullPathHash == catidle)
+        //{
+        //    Debug.Log("Arrow down pressed");
+        //    anim.SetTrigger(catscratch);
+        //}
+
+        //if (Input.GetAxis(AXISVERTICAL))
+        //{
+
+        //}
+
 	}
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+
+        Debug.Log("in Trigger stay");
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("in Trigger enter");
+    }
 }
