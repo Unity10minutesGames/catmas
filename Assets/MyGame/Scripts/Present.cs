@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Present : MonoBehaviour {
 
-    Color presentColor;
     Vector2 presentPosition;
     Vector2 presentSize;
-    int layer;
+    int sortingOrder;
+
+    private void Start()
+    {
+        sortingOrder = gameObject.GetComponent<Renderer>().sortingOrder;
+    }
 
     //get present list
     //at colorPresents, took presents and give them randomly colors
@@ -16,23 +20,12 @@ public class Present : MonoBehaviour {
     //if collider hit, checkColor, if color not ok, show rotten present.
     //renew presents
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-      //destroyPresent   
-    }
 
-    private void destroyPresent()
+    public void destroyPresent()
     {
-     //shaking present for 2 seconds, fade transperency, animation sparks fly
+        //shaking present for 2 seconds, fade transperency, animation sparks fly
+        Debug.Log("upppiiii");
+        gameObject.SetActive(false);
     }
 }

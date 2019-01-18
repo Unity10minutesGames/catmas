@@ -1,29 +1,62 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System;
+using System.Threading;
 using UnityEngine;
 
 public class PresentOrder : MonoBehaviour {
 
-    public GameObject present1, present2, present3, present4;
-    Color color;
+    public List<GameObject> menuCircs;
+    public List<GameObject> presentsGame;
 
-	// Use this for initialization  
-	void Start () {
-        color = Color.red;
-	}
 
-    private Color[] GetColorOrder()
+    private List<SpriteRenderer> menuCircsRenderer;
+    private List<SpriteRenderer> presentsRenderer;
+
+    private List<Color> colorList;
+
+  
+    void Start ()
     {
-        Color[] colorOrder = new Color[4];
-        colorOrder[0] = Color.red;
-        colorOrder[0] = Color.blue;
-        colorOrder[0] = Color.yellow;
-        colorOrder[0] = Color.green;
-        return colorOrder;
+        colorList = new List<Color> {
+            Color.red,
+            Color.blue,
+            Color.green,
+            Color.magenta
+        };
+
+        SetupMenuCirc();
+        SetupPresents();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    private void SetupPresents()
+    {
+        colorList.Shuffle();
+        presentsRenderer = new List<SpriteRenderer>();
+        foreach (GameObject item in presentsGame)
+        {
+            presentsRenderer.Add(item.GetComponent<SpriteRenderer>());
+        }
+
+        for (int i = 0; i < presentsRenderer.Count; i++)
+        {
+            presentsRenderer[i].color = colorList[i];
+        }
+    }
+
+    private void SetupMenuCirc()
+    {
+        colorList.Shuffle();
+        menuCircsRenderer = new List<SpriteRenderer>();
+        foreach (GameObject item in menuCircs)
+        {
+            menuCircsRenderer.Add(item.GetComponent<SpriteRenderer>());
+        }
+
+        for (int i = 0; i < menuCircsRenderer.Count; i++)
+        {
+            menuCircsRenderer[i].color = colorList[i];
+        }
+    }
 }

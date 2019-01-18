@@ -75,12 +75,7 @@ public class Player : MonoBehaviour {
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-
-        Debug.Log("in Trigger stay");
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("in Trigger enter");
+        Debug.Log(collision.name);
+        collision.gameObject.GetComponent<Present>().destroyPresent();
     }
 }
