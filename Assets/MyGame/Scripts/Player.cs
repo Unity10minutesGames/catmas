@@ -14,6 +14,8 @@ public class Player : MonoBehaviour {
     public float moveSpeed = 5.0f;
     public float padding = 0.5f;
     int currentpos = 0;
+    private bool waitForScratchStarted = false;
+    private bool StartExcitedCatAnimStarted = false;
 
     public bool CharacterEyesPlayer
     {
@@ -78,18 +80,18 @@ public class Player : MonoBehaviour {
         Debug.Log("OntriggerExit");
         GetComponentInChildren<Animator>().SetBool("excited", false);
         GetComponentInChildren<Animator>().SetBool("scratch", false);
+        waitForScratchStarted = false;
+        StartExcitedCatAnimStarted = false;
         StopAllCoroutines();
     }
 
     private void HandlePresent(Collider2D collision)
     {
+
+        StartCoroutine(StartExcitedCatAnim());
+
         if (collision.gameObject.GetComponent<Present>().isRightPresent(currentpos))
         {
-            
-            
-            //currentpos = (int)Mathf.Clamp(currentpos, 0, 3);
-            //Vector3 tmpPos = gameObject.GetComponent<Transform>().position;
-            //GetComponent<Animator>().SetBool("scratch", true);
 
             if (currentpos < 4)
             {
@@ -100,16 +102,32 @@ public class Player : MonoBehaviour {
         }
     }
 
+    private IEnumerator StartExcitedCatAnim()
+    {
+        if (StartExcitedCatAnimStarted)
+        {
+            GetComponentInChildren<Animator>().SetBool("eyesWall", CharacterEyesPlayer);
+            GetComponentInChildren<Animator>().SetBool("excited", true);
+            yield return new WaitForSeconds(2);
+            StartExcitedCatAnimStarted = true;
+        }
+        
+
+    }
+
     private IEnumerator WaitForScratch(Collider2D collision)
     {
-        Debug.Log("charater ayes plyer "+CharacterEyesPlayer);
-        GetComponentInChildren<Animator>().SetBool("eyesWall", CharacterEyesPlayer);
-        GetComponentInChildren<Animator>().SetBool("excited", true);
-        yield return new WaitForSeconds(2);
-        GetComponentInChildren<Animator>().SetBool("scratch", true);
-        GetComponentInChildren<Animator>().SetBool("eyesWall", CharacterEyesPlayer);
-        yield return new WaitForSeconds(3);
-        Destroy(collision.gameObject);
-        currentpos++;
+        if (!waitForScratchStarted)
+        {
+            waitForScratchStarted = true;
+            Debug.Log("Startsound");
+            GetComponentInChildren<Animator>().SetBool("eyesWall", CharacterEyesPlayer);
+            GetComponentInChildren<Animator>().SetBool("scratch", true);
+            GetComponentInChildren<AudioSource>().PlayOneShot(GetComponentInChildren<CatController>().lick);
+            yield return new WaitForSeconds(2);
+            Destroy(collision.gameObject);
+            currentpos++;
+        }
+        
     }
 }

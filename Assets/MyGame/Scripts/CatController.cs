@@ -5,6 +5,9 @@ using UnityEngine;
 public class CatController : MonoBehaviour {
 
     public Sprite catIdleBehind;
+    public AudioClip lick;
+    public AudioClip miau;
+
     private Sprite catIdleAhead;
 
     private const string STATESCRATCH = "scratch";
