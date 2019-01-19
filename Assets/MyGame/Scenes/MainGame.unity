@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 583180185}
   m_Layer: 0
   m_Name: present3
-  m_TagString: Present
+  m_TagString: PresentAhead
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -445,6 +445,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a257b51c8e5d342a775e50ac7765a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sortingOrder: 0
+  order: []
 --- !u!1 &587443457
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,7 +577,7 @@ GameObject:
   - component: {fileID: 641176115}
   m_Layer: 0
   m_Name: present1
-  m_TagString: Present
+  m_TagString: PresentAhead
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -675,6 +677,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a257b51c8e5d342a775e50ac7765a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sortingOrder: 0
+  order: []
 --- !u!1 &884697764
 GameObject:
   m_ObjectHideFlags: 0
@@ -859,7 +863,7 @@ GameObject:
   - component: {fileID: 1149082768}
   m_Layer: 0
   m_Name: present2
-  m_TagString: Present
+  m_TagString: PresentBehind
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -959,6 +963,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a257b51c8e5d342a775e50ac7765a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sortingOrder: 0
+  order: []
 --- !u!1001 &1178726841
 Prefab:
   m_ObjectHideFlags: 0
@@ -1304,7 +1310,7 @@ GameObject:
   - component: {fileID: 1323454473}
   m_Layer: 0
   m_Name: present4
-  m_TagString: Present
+  m_TagString: PresentAhead
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1404,6 +1410,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a257b51c8e5d342a775e50ac7765a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sortingOrder: 0
+  order: []
 --- !u!1 &1349416812
 GameObject:
   m_ObjectHideFlags: 0
@@ -1485,6 +1493,35 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 607414843}
   m_Script: {fileID: 11500000, guid: fda2e429161226f41bbe847c6644f090, type: 3}
+--- !u!1 &1507502304
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1507502305}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1507502305
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1507502304}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2045671523}
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1557581344
 GameObject:
   m_ObjectHideFlags: 0
@@ -1597,6 +1634,8 @@ MonoBehaviour:
   - {fileID: 1149082764}
   - {fileID: 583180181}
   - {fileID: 1323454469}
+  colorOrderList: []
+  currentColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &1592061814
 Transform:
   m_ObjectHideFlags: 0
@@ -1608,7 +1647,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1987563920
 GameObject:
@@ -1775,12 +1814,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2045671520}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.678, y: -0.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 1507502305}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &2045671524
 CapsuleCollider2D:
@@ -1810,6 +1849,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   padding: 1.46
+  catIdleBehind: {fileID: 21300000, guid: bccc91ca0e96d0347bf110fe6b6a3e19, type: 3}
 --- !u!50 &2045671526
 Rigidbody2D:
   serializedVersion: 4

@@ -6,16 +6,24 @@ public class Present : MonoBehaviour {
 
     Vector2 presentPosition;
     Vector2 presentSize;
-    int sortingOrder;
+    public int sortingOrder;
+    [HideInInspector] public List<Color> order;
 
     private void Start()
     {
         sortingOrder = gameObject.GetComponent<Renderer>().sortingOrder;
     }
 
-    //get present list
-    //at colorPresents, took presents and give them randomly colors
+    public bool isRightPresent(int currPos)
+    {
+        if(order[currPos] == gameObject.GetComponent<SpriteRenderer>().color)
+        {
+            return true;
+        }
 
+        return false;
+    }
+    
     //if collider hit, checkColor, if color ok destroy
     //if collider hit, checkColor, if color not ok, show rotten present.
     //renew presents
@@ -25,7 +33,6 @@ public class Present : MonoBehaviour {
     public void destroyPresent()
     {
         //shaking present for 2 seconds, fade transperency, animation sparks fly
-        Debug.Log("upppiiii");
         gameObject.SetActive(false);
     }
 }

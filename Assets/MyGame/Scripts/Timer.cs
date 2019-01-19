@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour {
 
-    
-
     private static Timer _instance;    
     private int seconds, minutes;
 

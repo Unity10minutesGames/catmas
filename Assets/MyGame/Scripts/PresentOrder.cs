@@ -16,7 +16,11 @@ public class PresentOrder : MonoBehaviour {
 
     private List<Color> colorList;
 
-  
+    [HideInInspector]
+    public List<Color> colorOrderList;
+    [HideInInspector]
+    public Color currentColor;
+
     void Start ()
     {
         colorList = new List<Color> {
@@ -43,11 +47,22 @@ public class PresentOrder : MonoBehaviour {
         {
             presentsRenderer[i].color = colorList[i];
         }
+
+        int ind = 0;
+
+        foreach (GameObject item in presentsGame)
+        {
+            item.gameObject.GetComponent<Present>().sortingOrder = ind;
+            ind++;
+            item.gameObject.GetComponent<Present>().order = colorOrderList;
+        }
     }
 
     private void SetupMenuCirc()
     {
         colorList.Shuffle();
+        colorOrderList = new List<Color>(colorList);
+
         menuCircsRenderer = new List<SpriteRenderer>();
         foreach (GameObject item in menuCircs)
         {
@@ -56,7 +71,8 @@ public class PresentOrder : MonoBehaviour {
 
         for (int i = 0; i < menuCircsRenderer.Count; i++)
         {
-            menuCircsRenderer[i].color = colorList[i];
+            menuCircsRenderer[i].color = colorOrderList[i];
         }
+       
     }
 }
