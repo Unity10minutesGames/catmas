@@ -8,6 +8,17 @@ The cat character is moved by the keys arrow left and right and can be turned by
 To open the presents sit in front of the present and wait. First the cat cat is excited (moving up/down) in front of the present.
 If it's the right present the cat destroys the present. 
 
+<div>
+<img src = "./Screenshots/gameOverScene.jpg" width = "500">
+<img src = "./Screenshots/mainScene.jpg" width = "500">
+<img src = "./Screenshots/welcomeScene.jpg" width = "500">
+</div>
+
+
+div>
+<img src="./Screenshot/growman.jpg" width="500">
+</div>
+
 Shuffle List
 https://stackoverflow.com/questions/273313/randomize-a-listt 
 https://jamesshinevar.com/2017/05/28/shuffle-a-list-c-fisher-yates-shuffle/
@@ -28,6 +39,7 @@ Open issues:
 Topics Covered:
 + Singelton pattern
 + Using lists
++ Permutation for List Shuffle
 + Scenemanagement
 + Audio: at least 2 different AudioSources for playOneshot respectively play
 + Change sprite properties from script
