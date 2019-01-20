@@ -8,7 +8,9 @@ public class Player : MonoBehaviour {
     private const string PRESENTBEHIND = "PresentBehind";
     private const string PRESENTAHEAD = "PresentAhead";
     private bool characterEyesPlayer = true;
-
+    private Animator anim;
+    private AudioSource audioSource;
+    private CatController catController;
     private float xMin, xMax;
 
     public float moveSpeed = 5.0f;
@@ -16,6 +18,7 @@ public class Player : MonoBehaviour {
     int currentpos = 0;
     private bool waitForScratchStarted = false;
     private bool StartExcitedCatAnimStarted = false;
+    private bool miauStarted = false;
 
     public bool CharacterEyesPlayer
     {
@@ -28,6 +31,16 @@ public class Player : MonoBehaviour {
         {
             characterEyesPlayer = value;
         }
+    }
+
+    private void Start()
+    {
+        anim = GetComponentInChildren<Animator>();
+        audioSource = GetComponentInChildren<AudioSource>();
+        catController = GetComponentInChildren<CatController>();
+        SetupMoveBounderies();
+        audioSource.volume = 0.03f;
+        audioSource.PlayOneShot(catController.purr);
     }
 
     private void SetupMoveBounderies()
@@ -44,12 +57,6 @@ public class Player : MonoBehaviour {
 
         transform.position = new Vector2(newPosX, transform.position.y);
     }
-
-	// Use this for initializations
-	void Start ()
-    {
-        SetupMoveBounderies();
-    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -60,8 +67,6 @@ public class Player : MonoBehaviour {
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        //Debug.Log("in on Trigger Stay");
-        //if(collision.name == "present2Behind")
         if(collision.tag == PRESENTBEHIND && !CharacterEyesPlayer)
         {
             HandlePresent(collision);
@@ -71,48 +76,50 @@ public class Player : MonoBehaviour {
         {
             HandlePresent(collision);
         }
-
-        //collision.gameObject.GetComponent<Present>().destroyPresent();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         Debug.Log("OntriggerExit");
-        GetComponentInChildren<Animator>().SetBool("excited", false);
-        GetComponentInChildren<Animator>().SetBool("scratch", false);
+        anim.SetBool("excited", false);
+        anim.SetBool("scratch", false);
         waitForScratchStarted = false;
+
         StartExcitedCatAnimStarted = false;
+        miauStarted = false;
         StopAllCoroutines();
     }
 
     private void HandlePresent(Collider2D collision)
     {
-
         StartCoroutine(StartExcitedCatAnim());
 
         if (collision.gameObject.GetComponent<Present>().isRightPresent(currentpos))
         {
-
             if (currentpos < 4)
             {
                 StartCoroutine(WaitForScratch(collision));
-            }
-            //collision.gameObject.GetComponent<Present>().destroyPresent();
-            Debug.Log("in Handle Present");
+            }  
         }
     }
 
     private IEnumerator StartExcitedCatAnim()
     {
-        if (StartExcitedCatAnimStarted)
+        if (!StartExcitedCatAnimStarted)
         {
-            GetComponentInChildren<Animator>().SetBool("eyesWall", CharacterEyesPlayer);
-            GetComponentInChildren<Animator>().SetBool("excited", true);
+            if (!miauStarted)
+            {
+                Debug.Log("Start Clip");
+                miauStarted = true;
+                audioSource.PlayOneShot(catController.miau);
+            }
+
+            Debug.Log("in exites startee");
+            anim.SetBool("eyesPlayer", CharacterEyesPlayer);
+            anim.SetBool("excited", true);
             yield return new WaitForSeconds(2);
             StartExcitedCatAnimStarted = true;
         }
-        
-
     }
 
     private IEnumerator WaitForScratch(Collider2D collision)
@@ -120,14 +127,12 @@ public class Player : MonoBehaviour {
         if (!waitForScratchStarted)
         {
             waitForScratchStarted = true;
-            Debug.Log("Startsound");
-            GetComponentInChildren<Animator>().SetBool("eyesWall", CharacterEyesPlayer);
-            GetComponentInChildren<Animator>().SetBool("scratch", true);
-            GetComponentInChildren<AudioSource>().PlayOneShot(GetComponentInChildren<CatController>().lick);
+            anim.SetBool("eyesPlayer", CharacterEyesPlayer);
+            anim.SetBool("scratch", true);
+            audioSource.PlayOneShot(catController.lick);
             yield return new WaitForSeconds(2);
             Destroy(collision.gameObject);
             currentpos++;
         }
-        
     }
 }
