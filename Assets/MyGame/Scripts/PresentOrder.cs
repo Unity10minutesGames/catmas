@@ -10,7 +10,6 @@ public class PresentOrder : MonoBehaviour {
     public List<GameObject> menuCircs;
     public List<GameObject> presentsGame;
 
-
     private List<SpriteRenderer> menuCircsRenderer;
     private List<SpriteRenderer> presentsRenderer;
 

@@ -9,13 +9,16 @@ public class Player : MonoBehaviour {
     private const string PRESENTAHEAD = "PresentAhead";
     private bool characterEyesPlayer = true;
     private Animator anim;
-    private AudioSource audioSource;
+    private AudioSource[] audioSources;
+    private AudioSource playOneShotAudioSource, playMiau, playLick;
+    //private ScoreSingelton scoreSingelton;
     private CatController catController;
+    private SceneLoader sceneLoader;
     private float xMin, xMax;
 
     public float moveSpeed = 5.0f;
     public float padding = 0.5f;
-    int currentpos = 0;
+    private int currentpos = 0;
     private bool waitForScratchStarted = false;
     private bool StartExcitedCatAnimStarted = false;
     private bool miauStarted = false;
@@ -35,12 +38,18 @@ public class Player : MonoBehaviour {
 
     private void Start()
     {
-        anim = GetComponentInChildren<Animator>();
-        audioSource = GetComponentInChildren<AudioSource>();
         catController = GetComponentInChildren<CatController>();
+        anim = GetComponentInChildren<Animator>();
+        audioSources = GetComponentsInChildren<AudioSource>();
+        //scoreSingelton = FindObjectOfType<ScoreSingelton>();
+        sceneLoader = FindObjectOfType<SceneLoader>();
         SetupMoveBounderies();
-        audioSource.volume = 0.03f;
-        audioSource.PlayOneShot(catController.purr);
+
+        playOneShotAudioSource = audioSources[0];
+        playMiau = audioSources[1];
+        playLick = audioSources[2];
+
+        playOneShotAudioSource.PlayOneShot(catController.purr,0.4f);
     }
 
     private void SetupMoveBounderies()
@@ -76,17 +85,24 @@ public class Player : MonoBehaviour {
         {
             HandlePresent(collision);
         }
+
+        if(collision.tag == "Tree" && currentpos > 3)
+        {
+            sceneLoader.LoadMainGameScene();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("OntriggerExit");
         anim.SetBool("excited", false);
         anim.SetBool("scratch", false);
         waitForScratchStarted = false;
 
+        playMiau.Stop();
+        playLick.Stop();
+
         StartExcitedCatAnimStarted = false;
-        miauStarted = false;
+        
         StopAllCoroutines();
     }
 
@@ -107,14 +123,13 @@ public class Player : MonoBehaviour {
     {
         if (!StartExcitedCatAnimStarted)
         {
-            if (!miauStarted)
+            Debug.Log("Start Clip");
+            miauStarted = true;
+            if (!playMiau.isPlaying)
             {
-                Debug.Log("Start Clip");
-                miauStarted = true;
-                audioSource.PlayOneShot(catController.miau);
+                playMiau.Play();
             }
-
-            Debug.Log("in exites startee");
+            
             anim.SetBool("eyesPlayer", CharacterEyesPlayer);
             anim.SetBool("excited", true);
             yield return new WaitForSeconds(2);
@@ -129,9 +144,15 @@ public class Player : MonoBehaviour {
             waitForScratchStarted = true;
             anim.SetBool("eyesPlayer", CharacterEyesPlayer);
             anim.SetBool("scratch", true);
-            audioSource.PlayOneShot(catController.lick);
+            if (!playLick.isPlaying)
+            {
+                playLick.Play();
+            }
+            
             yield return new WaitForSeconds(2);
             Destroy(collision.gameObject);
+            ScoreSingelton.instance.AddPresent();
+            Debug.Log(ScoreSingelton.instance.DestroyedPresents);
             currentpos++;
         }
     }

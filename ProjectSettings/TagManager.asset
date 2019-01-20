@@ -7,6 +7,7 @@ TagManager:
   - Present
   - PresentAhead
   - PresentBehind
+  - Tree
   layers:
   - Default
   - TransparentFX
