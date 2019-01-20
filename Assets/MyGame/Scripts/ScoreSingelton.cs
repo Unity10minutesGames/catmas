@@ -6,7 +6,7 @@ public class ScoreSingelton : MonoBehaviour {
 
     public static ScoreSingelton instance = null;
 
-    public int destroyedPresents = 10;
+    public int destroyedPresents = 0;
 
     public int DestroyedPresents
     {
