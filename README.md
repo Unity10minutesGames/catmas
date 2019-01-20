@@ -9,15 +9,13 @@ To open the presents sit in front of the present and wait. First the cat cat is 
 If it's the right present the cat destroys the present. 
 
 <div>
+<img src = "./Screenshots/catmasGSconcept.jpg" width = "500">
 <img src = "./Screenshots/gameOverScene.jpg" width = "500">
 <img src = "./Screenshots/mainScene.jpg" width = "500">
 <img src = "./Screenshots/welcomeScene.jpg" width = "500">
 </div>
 
 
-div>
-<img src="./Screenshot/growman.jpg" width="500">
-</div>
 
 Shuffle List
 https://stackoverflow.com/questions/273313/randomize-a-listt 
