@@ -1,12 +1,15 @@
-# catmas
+# The Catmas
 Dev platform: Unity 2018.2.14f, Visual Studio 2017 Community version 15.9.3, Windows 10. Scripting Runtime Version .NET4.x Equivalent, API compatibility Lvel .NET Standard 2.0; 
 Targest platform: WebGL (Referenz resolution: 1024 * 768)
 
-The catmas game is a simple 2D game inspired by the 10 min challange to practice 2D game development. 
-The cat has to open presents in the right color order. The order is shown on the left bottom. 
-The cat character is moved by the keys arrow left and right and can be turned by the keys arrow up/down. 
-To open the presents sit in front of the present and wait. First the cat cat is excited (moving up/down) in front of the present.
-If it's the right present the cat destroys the present. 
+The Catmas Game is a simple 2D game inspired by the 10-minute challenge of practicing 2D game development.
+The cat must open gifts in the correct color sequence.
+The order is shown at the bottom left.
+The cat can be moved in the desired direction with the left and right arrow keys.
+It can be rotated using the up and down arrow keys.
+To open a gift, sit in front of the gift with the cat and wait.
+At first, the kitten is excited (moving up and down) in front of the present.
+If it's the right gift, the cat destroys the gift otherwise, it does nothing.
 
 <div>
 <img src = "./Screenshots/catmasGSconcept.jpg" width = "500">
