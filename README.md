@@ -1,5 +1,5 @@
 # The Catmas
-Dev platform: Unity 2018.2.14f, Visual Studio 2017 Community version 15.9.3, Windows 10. Scripting Runtime Version .NET4.x Equivalent, API compatibility Lvel .NET Standard 2.0; 
+Dev platform: Unity 2021.1.18f, Visual Studio 2017 Community version 15.9.3, Windows 10. Scripting Runtime Version .NET4.x Equivalent, API compatibility Lvel .NET Standard 2.0; 
 Targest platform: WebGL (Referenz resolution: 1024 * 768)
 
 The Catmas Game is a simple 2D game inspired by the 10-minute challenge of practicing 2D game development.
